@@ -109,7 +109,7 @@ class _ProfileState extends State<Profile> {
                                 Icons.add_a_photo,
                                 size: 50,
                               ), // icon
-                              Text("Gallery"), // text
+                              Text("Camera"), // text
                             ],
                           ),
                         ),
@@ -213,54 +213,51 @@ class _ProfileState extends State<Profile> {
           alignment: Alignment.bottomRight,
           children: [
             Container(
-              height: 200,
-              width: 150,
-              decoration: BoxDecoration(shape: BoxShape.circle),
-              child: (imageUrl.length != 0)
-                  ? GestureDetector(
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (ctx) => ViewImage(
-                                tag: 'profile',
-                                imageurl: imageUrl,
-                                getimage: getImage)),
-                      ),
-                      child: Center(
-                        child: Hero(
-                          transitionOnUserGestures: true,
-                          tag: 'profile',
-                          child: Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.15),
-                                    blurRadius: 8,
-                                    spreadRadius: 6,
-                                    offset: const Offset(0, 0),
-                                  ),
-                                ],
-                                border: Border.all(color: Colors.blueAccent),
-                                shape: BoxShape.circle),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: FadeInImage.memoryNetwork(
-                                placeholder: kTransparentImage,
-                                image: imageUrl,
-                                alignment: Alignment.center,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(shape: BoxShape.circle),
+                child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (ctx) => ViewImage(
+                                  tag: 'profile',
+                                  imageurl: imageUrl,
+                                  getimage: getImage)),
+                        ),
+                    child: Center(
+                      child: Hero(
+                        transitionOnUserGestures: true,
+                        tag: 'profile',
+                        child: Container(
+                          height: 175,
+                          width: 175,
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.blue.withOpacity(0.15),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 0),
+                                ),
+                              ],shape: BoxShape.circle,
+                              border: Border.all(color: Colors.blueAccent),
                           ),
+                          child: (imageUrl.length != 0)
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: FadeInImage.memoryNetwork(
+                                    placeholder: kTransparentImage,
+                                    image: imageUrl,
+                                    alignment: Alignment.center,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : Icon(
+                                  Icons.account_circle,
+                                  size: 175,
+                                ),
                         ),
                       ),
-                    )
-                  : Icon(
-                      Icons.account_circle,
-                      size: 200,
-                    ),
-            ),
+                    ))),
             IconButton(
               onPressed: getImage,
               icon: Icon(

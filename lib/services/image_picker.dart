@@ -83,7 +83,7 @@ class _ImagePickState extends State<ImagePick> {
                                     .colorScheme
                                     .primary,
                               ), // icon
-                              Text("Gallery"), // text
+                              Text("Camera"), // text
                             ],
                           ),
                         ),
