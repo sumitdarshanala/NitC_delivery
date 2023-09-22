@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "343188211543",
+    "project_id": "getmyfoodelivery",
+    "storage_bucket": "getmyfoodelivery.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343188211543:android:adf2fab82e2823ce336012",
+        "android_client_info": {
+          "package_name": "com.example.getmyfooddelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343188211543-v6cmgfm33h4j0h3d5u01olnabqt29o55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfBx4Qmg6Y9RKSHLdYxlc-dQsJm1z6VUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343188211543-v6cmgfm33h4j0h3d5u01olnabqt29o55.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
