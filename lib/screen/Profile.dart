@@ -278,7 +278,7 @@ class _ProfileState extends State<Profile> {
         ),
         ListTile(
           leading: Icon(Icons.error_outline),
-          title: Text("about"),
+          title: Text(" ABOUT "),
           trailing: Icon(Icons.edit),
         ),
       ],
