@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../componenets/imageviewer.dart';
+import '../pages/Edit_profile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -21,10 +22,27 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     getImageUrl();
+    getAbout();
     super.initState();
   }
 
   final user = FirebaseAuth.instance.currentUser;
+
+  void getAbout() async {
+    final _about = await FirebaseFirestore.instance
+        .collection('user_images')
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      final data = value.data() as Map<String, dynamic>;
+      return data['about'];
+    });
+    if (_about != null) {
+      setState(() {
+        about = _about;
+      });
+    }
+  }
 
   void getImageUrl() async {
     var image;
@@ -43,11 +61,12 @@ class _ProfileState extends State<Profile> {
 
   String imageUrl = "";
   File? _pickedImageFile;
+  String about = "Available";
 
   void selectImage(bool check) async {
     showDialog(
         context: context,
-        builder: (context) {
+        builder: (ctx) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -68,12 +87,11 @@ class _ProfileState extends State<Profile> {
       Navigator.pop(context);
       return;
     }
+    Navigator.pop(context);
     setState(() {
       _pickedImageFile = File(pickedImage.path);
       registerUser();
-      Navigator.pop(context);
     });
-    // widget.onPickImage(_pickedImageFile!);
   }
 
   void getImage() {
@@ -232,14 +250,15 @@ class _ProfileState extends State<Profile> {
                           height: 175,
                           width: 175,
                           decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.blue.withOpacity(0.15),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 0),
-                                ),
-                              ],shape: BoxShape.circle,
-                              border: Border.all(color: Colors.blueAccent),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.blue.withOpacity(0.15),
+                                blurRadius: 8,
+                                offset: const Offset(0, 0),
+                              ),
+                            ],
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.blueAccent),
                           ),
                           child: (imageUrl.length != 0)
                               ? ClipRRect(
@@ -268,16 +287,72 @@ class _ProfileState extends State<Profile> {
             )
           ],
         ),
-        ListTile(
-          leading: Icon(Icons.account_circle),
-          title: Text(user!.email.toString()),
-          trailing: Icon(Icons.edit),
+        SizedBox(
+          height: 15,
         ),
-        ListTile(
-          leading: Icon(Icons.error_outline),
-          title: Text(" about "),
-          trailing: Icon(Icons.edit),
+        Container(
+          color: Theme.of(context).colorScheme.primaryContainer,
+          child: ListTile(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (ctx) => EditProfile()),
+              );
+            },
+            leading: Icon(Icons.account_circle),
+            subtitle: Text(
+              user!.email.toString(),
+              textScaleFactor: 1.25,
+            ),
+            title: Text(
+              "Email",
+              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+            ),
+            trailing: Icon(Icons.edit),
+          ),
         ),
+        SizedBox(
+          height: 15,
+        ),
+        Container(
+          color: Theme.of(context).colorScheme.primaryContainer,
+          child: ListTile(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (ctx) => EditProfile()),
+              );
+            },
+            leading: Icon(Icons.error_outline),
+            title: Text(
+              "About",
+              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(about),
+            trailing: Icon(Icons.edit),
+          ),
+        ),
+        Expanded(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Center(
+              child: Text("Food Delivery",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold)),
+            ),
+            Center(
+                child: Text(
+              "*All Rights are reserved*",
+              textScaleFactor: 0.6,
+              style: TextStyle(
+                  color:
+                      Theme.of(context).colorScheme.primary.withOpacity(0.6)),
+            )),
+            SizedBox(
+              height: 30,
+            )
+          ],
+        )),
       ],
     ));
   }

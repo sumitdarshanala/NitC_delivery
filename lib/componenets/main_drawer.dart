@@ -273,7 +273,28 @@ class _MainDrawerState extends State<MainDrawer> {
                     getAlert(context);
                     // showDialog(
                     //     context: context, builder: (_) => ConfirmedLogout());
-                  })
+                  }),
+              Container(
+                height: 250,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Center(
+                        child: Text("Food Delivery",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      Center(
+                          child: Text(
+                            "*All Rights are reserved*",
+                            textScaleFactor: 0.6,
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary.withOpacity(0.6)),
+                          ))
+                    ],
+                  )),
             ],
           ),
         ],
