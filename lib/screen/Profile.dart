@@ -224,9 +224,10 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Scaffold(
+      body: SingleChildScrollView(
         child: Column(
-      children: [
+        children: [
         Stack(
           alignment: Alignment.bottomRight,
           children: [
@@ -330,7 +331,8 @@ class _ProfileState extends State<Profile> {
             trailing: Icon(Icons.edit),
           ),
         ),
-        Expanded(
+        Container(
+          height: 100,
             child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -353,7 +355,9 @@ class _ProfileState extends State<Profile> {
             )
           ],
         )),
-      ],
-    ));
+        ],
+        ),
+      ),
+    );
   }
 }
