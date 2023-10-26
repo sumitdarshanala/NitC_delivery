@@ -18,25 +18,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    // darkTheme: ThemeData.dark().copyWith(
-    //     useMaterial3: true,
-    //     colorScheme: kDarkColorScheme,
-    //     cardTheme: const CardTheme().copyWith(
-    //       color: kDarkColorScheme.secondaryContainer,
-    //       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    //     ),
-    //     elevatedButtonTheme: ElevatedButtonThemeData(
-    //       style: ElevatedButton.styleFrom(
-    //         backgroundColor: kDarkColorScheme.primaryContainer,
-    //       ),
-    //     ),
-    //     textTheme: ThemeData().textTheme.copyWith(
-    //           titleLarge: TextStyle(
-    //             fontWeight: FontWeight.normal,
-    //             color: kDarkColorScheme.onSecondaryContainer,
-    //             fontSize: 14,
-    //           ),
-    //         )),
+
     theme: ThemeData().copyWith(
       useMaterial3: true,
       colorScheme: kColorScheme,

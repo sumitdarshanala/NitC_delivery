@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:getmyfooddelivery/componenets/square_title.dart';
 import 'package:getmyfooddelivery/services/auth_services.dart';
 
+import '../Data/dummydata.dart';
 import '../componenets/mybutton.dart';
 import '../componenets/text_field.dart';
 import '../services/image_picker.dart';
@@ -66,7 +67,9 @@ class _RegisterPageState extends State<RegisterPage> {
         final json = {
           'email': emailcontroller.text,
           'password': passwordcontroller.text,
-          'image_url': imageurl
+          'image_url': imageurl,
+          'cart':<Item>[],
+          'order':[]
         };
         final docUser = await FirebaseFirestore.instance
             .collection('user_images')

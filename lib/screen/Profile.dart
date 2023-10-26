@@ -192,6 +192,7 @@ class _ProfileState extends State<Profile> {
         final _imageurl = await storageRef.getDownloadURL();
         print(_imageurl);
         var password = "sumit123";
+
         await FirebaseFirestore.instance
             .collection('user_images')
             .doc(user!.uid)
@@ -199,13 +200,43 @@ class _ProfileState extends State<Profile> {
             .then((value) {
           if (value.data() != null) {
             final data = value.data() as Map<String, dynamic>;
-            password = data['password'];
+            if(data['password'] != null) {
+              password = data['password'];
+            }
           }
         });
-        final json = <String, String>{
-          "email": user!.email.toString(),
-          "image_url": _imageurl,
-          "password": password,
+        var order = [];
+        var cart = [];
+        await FirebaseFirestore.instance
+            .collection('user_images')
+            .doc(user!.uid)
+            .get()
+            .then((value) {
+          if (value.data() != null) {
+            final data = value.data() as Map<String, dynamic>;
+            if(data['cart'] != null) {
+              cart = data['cart'];
+            }
+          }
+        });
+        await FirebaseFirestore.instance
+            .collection('user_images')
+            .doc(user!.uid)
+            .get()
+            .then((value) {
+          if (value.data() != null) {
+            final data = value.data() as Map<String, dynamic>;
+            if(data['order'] != null) {
+              order = data['order'];
+            }
+          }
+        });
+        final json = <String, dynamic>{
+          "email" : user!.email.toString(),
+          "image_url" : _imageurl,
+          "password" : password,
+          "cart" : cart,
+          "order" : order,
         };
         setState(() {
           imageUrl = _imageurl;

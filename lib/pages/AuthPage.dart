@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +11,24 @@ import 'HomePage.dart';
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
 
+  Future<bool> hasNetwork() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+    } on SocketException catch (_) {
+      return false;
+    }
+  }
+  void checkStatus() async{
+    bool isNetwork = await hasNetwork();
+    if(isNetwork){
+      //network issue is to be solve here
+
+    }
+  }
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
+    checkStatus();
     return Scaffold(
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
